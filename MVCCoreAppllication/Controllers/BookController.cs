@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVCCoreAppllication.Models;
+using MVCCoreAppllication.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,17 +10,23 @@ namespace MVCCoreAppllication.Controllers
 {
     public class BookController : Controller
     {
-        public string GetAllBooks()
+        private readonly BookRepository _bookRepository = null;
+        public BookController()
         {
-            return "List of all books";
+            _bookRepository = new BookRepository();
         }
-        public string GetBook(int id)
+        public ViewResult GetAllBooks()
         {
-            return $"Book with id={id}";
+           var data=_bookRepository.GetAllBooks();
+            return View();
         }
-        public string SearchBook(string bookname,string authorname)
+        public BookModel GetBook(int id)
         {
-            return $"Book Name is {bookname} & Author Name is {authorname}";
+            return _bookRepository.GetBookById(id);
+        }
+        public List<BookModel> SearchBook(string title,string authorname)
+        {
+            return _bookRepository.SearchBook(title,authorname);
         }
     }
 }

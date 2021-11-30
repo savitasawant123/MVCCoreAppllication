@@ -8,9 +8,14 @@ namespace MVCCoreAppllication.Controllers
 {
     public class HomeController:Controller
     {
-        public string Index()
+        public ViewResult Index()
         {
-            return "Savita";
+            return View();
         }
+        public ViewResult AboutUs()
+        {
+            return View();
+        }
+
     }
 }
